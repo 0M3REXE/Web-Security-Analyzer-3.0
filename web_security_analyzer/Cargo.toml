@@ -1,0 +1,45 @@
+[package]
+name = "web_security_analyzer"
+version = "0.1.0"
+edition = "2021"
+description = "Web Security Analyzer – Rust port of the Python ML-based URL scanner"
+
+[dependencies]
+# HTTP client (blocking, no async needed)
+reqwest = { version = "0.12", features = ["blocking", "rustls-tls"], default-features = false }
+
+# HTML parsing
+scraper = "0.25"
+
+# ONNX inference – pure Rust, no pre-built binary download required
+tract-onnx = "0.23.0-dev.2"
+
+# ndarray for tensor manipulation (re-exported by tract, but explicit dep for clarity)
+ndarray = "0.16"
+
+# CLI argument parsing
+clap = { version = "4", features = ["derive"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Regex
+regex = "1"
+
+# URL parsing
+url = "2"
+
+# Colored terminal output
+colored = "2"
+
+# Error handling
+anyhow = "1"
+
+# Date / time
+chrono = { version = "0.4", features = ["serde"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
